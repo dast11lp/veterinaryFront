@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { CarouselSlide } from "./CarouselSlide";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Carousel = () => {
   const sliderRef = useRef(null);
@@ -51,25 +53,29 @@ export const Carousel = () => {
   }
 
   return (
-    <div className="slider" ref={sliderRef}>
-      <CarouselSlide />
-      <CarouselSlide />
-      <CarouselSlide />
-      <CarouselSlide />
-      <CarouselSlide />
+    <div className="carousel">
+      <div className="slider" ref={sliderRef}>
+        <CarouselSlide />
+        <CarouselSlide />
+        <CarouselSlide />
+        <CarouselSlide />
+        <CarouselSlide />
+        <div className="slider__dots" ref={dotContainerRef}>
+          {slides.map((el, i) => (
+            <button className="slider__dots__dot" style={{
+              background: i === currSlide ? '#47464659' : ''
+            }} key={i}
+              onClick={() => moveWithBtn(i)}></button>
+          ))}
+        </div>
 
-      <div className="slider__btns">
-        <div className="slider__btns__btn--left" onClick={prevSlide}> &#60; </div>
-        <div className="slider__btns__btn--right" onClick={nextSlide}> &#62; </div>
-      </div>
+        <button className="slider__btn slider__btn--left" onClick={prevSlide}>
+          <FontAwesomeIcon icon={faChevronLeft} />
+        </button>
 
-      <div className="dots" ref={dotContainerRef}>
-        {slides.map((el, i) => (
-          <button className="dot" style={{
-            background: i === currSlide ? 'red' : ''
-          }} key={i}
-            onClick={()=>moveWithBtn(i)}>X</button>
-        ))}
+        <button className="slider__btn slider__btn--right" onClick={nextSlide}>
+          <FontAwesomeIcon icon={faChevronRight} />
+        </button>
       </div>
     </div>
   );
