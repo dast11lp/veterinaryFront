@@ -1,0 +1,16 @@
+@use '../abstracts/variables' as v;
+
+.layout {
+    &__pages {
+        display: grid;
+        grid-template-columns: 1fr repeat(12, minmax(min-content, 10rem)) 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas: 
+        ". page page page page page page page page page page page page .";
+    }
+}
+
+.page {
+    grid-area: page;
+}
+

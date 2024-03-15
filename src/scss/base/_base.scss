@@ -1,0 +1,19 @@
+@use "./../abstracts/functions" as f;
+@use "./../abstracts/variables" as v;
+
+*,
+* ::after,
+* ::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: f.font-base(10);
+    box-sizing: border-box;
+}
+
+body {
+    background: v.$color--primary;
+}

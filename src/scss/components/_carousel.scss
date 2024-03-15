@@ -1,0 +1,24 @@
+.slider {
+    .slide {
+        position: absolute;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin: 10rem 0;
+        transition: transform 1s;
+    }
+}
+
+.slider__btns {
+    // position: absolute;
+    // bottom: -200px;
+}
+
+.dots {
+    position: absolute;
+    bottom: -200px;
+}
+
+.dots {
+    cursor: pointer;
+}

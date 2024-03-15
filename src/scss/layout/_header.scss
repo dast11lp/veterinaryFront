@@ -1,0 +1,65 @@
+@use '../abstracts/variables' as v;
+
+.header {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr repeat(12, minmax(min-content, 10rem)) 1fr;
+    grid-template-rows: min-content 1fr ;
+    grid-template-areas: 
+    ". navbar navbar navbar navbar navbar navbar navbar navbar navbar navbar navbar navbar ."
+    ". header-content header-content header-content header-content header-content header-content header-content header-content header-content header-content header-content header-content .";
+    min-height: 100vh;
+
+    &__backgroud {
+        position: absolute;
+        z-index: 80;
+    }
+
+    &__content {
+        z-index: 100;
+        grid-area: header-content;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 2fr 1fr;
+        align-items: center;
+        &__left{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            // &__title{
+
+            // }
+            &__pg{
+                margin: 2rem 0;
+            }
+        }
+        &__right{}
+        &__bottom{
+            grid-row: 2;
+            grid-column: 1 / -1;
+            display: flex;
+            height: 9.5rem;
+            background: v.$color--secundary;
+            border-radius: v.$border-radius--primary;
+            // border: 1px solid black;
+            box-shadow: v.$border--shadow--primary;
+            &__info {
+                flex:1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+                &:last-child {
+                    background: v.$color--quintenary;
+                    border-radius: v.$border-radius--right;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .header {
+        min-height: max-content ;
+    }
+}

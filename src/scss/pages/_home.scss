@@ -1,0 +1,15 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    padding: 10rem 0;
+
+    text-align: center;
+
+    &__title {
+        padding: 1.5rem;
+    }
+
+    &__pg {
+
+    }
+}

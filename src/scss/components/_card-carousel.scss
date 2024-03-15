@@ -1,0 +1,38 @@
+@use '../abstracts/variables' as v;
+
+.card-carousel {
+    height: 200px;
+    width: 550px;
+    background: v.$color--secundary;
+    box-shadow: v.$border--shadow--primary;
+    border-radius: v.$border-radius--primary;
+    margin: 1rem;
+
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+
+    text-align: left;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 3rem;
+    }
+
+    &__image{
+        position: relative;
+        background: v.$color--tertiary;
+        border-radius: v.$border-radius--primary;
+        clip-path: circle(50% at 75% 50%);
+        &__img{
+            position: absolute;
+            top: -13px;
+            right: -50px;
+            width: 107%;
+            height: 107%;
+            object-fit: cover;
+        }
+    }
+}

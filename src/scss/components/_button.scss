@@ -1,0 +1,22 @@
+@use "../abstracts/variables" as v;
+
+.btn {
+    padding: 12px 15px;
+    background: v.$color--tertiary;
+    border: none;
+    border-radius: v.$border-radius--primary;
+    transition: transform .2s ease;
+
+    &--flex {
+        max-width: 14rem ;
+    }
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+
+    &:active {
+        transform: translateY(5px);
+    }
+}
