@@ -60,7 +60,7 @@ export const Carousel = () => {
         <CarouselSlide />
         <CarouselSlide />
         <div className="slider__dots" ref={dotContainerRef}>
-          {slides.map((el, i) => (
+          {slides.map((_, i) => (
             <button
               className="slider__dots__dot"
               style={{
