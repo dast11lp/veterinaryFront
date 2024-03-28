@@ -23,6 +23,15 @@
         // }
         &__menu {
             display: none;
+            height: 35px;
+            z-index: 100;
+
+            &__icon {
+                font-size: 35px;
+            }
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 }
@@ -34,16 +43,20 @@
             position: relative;
             padding: 0.5rem;
             &__links {
+                display: none;
                 flex-direction: column;
                 &__item {
                     margin: 5px 0;
                 }
             }
+            &__user-settings {
+                display: none;
+            }
             &__menu {
                 display: block;
                 position: absolute;
-                top: 0;
-                right: 0;
+                top: 1rem;
+                right: 1rem;
             }
         }
     }

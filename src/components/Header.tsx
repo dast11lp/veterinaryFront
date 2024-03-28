@@ -1,31 +1,26 @@
+import { useLocation } from "react-router-dom"
 import { HeaderContent } from "./HeaderContent"
 import { Navbar } from "./Navbar"
-import dogBackground from "../assets/img/dog-header.png";
+import { useEffect, useState } from "react"
+
 
 export const Header: React.FC = () => {
-  return (
-    <header className="header" >
-      <Navbar />
-      <HeaderContent />
-      <div className="header__backgroud" style={{
-        position: "absolute",
-        zIndex: "80",
-        background: `url(${dogBackground})`,
-        backgroundSize: "cover",
-        height: "100%",
-        width: "100%",
-        // clipPath: "ellipse(31% 52% at 61% 52%)"
-        clipPath: "ellipse(30% 70% at 70% 40%)"
-        
-      }} />
-      <div className="header__backgroud" style={{
-         background: `url(${dogBackground})`,
-         backgroundSize: "cover",
-         height: "100%",
-         width: "100%",
-         clipPath: "ellipse(29% 66% at 78% 40%)"
-      }}/>
 
+  const location = useLocation()
+  const [homePlaced, setHomePlaced]= useState(false);
+  useEffect(()=> {
+    if(location.pathname === '/')
+      setHomePlaced(true)
+    else
+      setHomePlaced(false)
+  }, [location.pathname])
+
+  return (
+    <header className="header" style={{
+      minHeight: `${homePlaced === true ? '100vh': ''}`
+    }}>
+      <Navbar />
+      { homePlaced === true ? <HeaderContent /> : null}
     </header>
   )
 }

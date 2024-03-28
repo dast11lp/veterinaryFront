@@ -1,0 +1,22 @@
+.calendar {
+    &__row {
+        display: flex;
+        &--header {
+            font-weight: 700;
+        }
+
+        &--content {
+            display: grid;
+            grid-template-columns: repeat(7, 30px);
+            grid-template-rows: repeat(5, 30px);
+        }
+        &__column {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            width: 30px;
+            background-color: red;
+        }
+    }
+}

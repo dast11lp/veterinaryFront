@@ -1,0 +1,43 @@
+@use './../abstracts/variables' as v;
+
+.input {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 90px;
+    background-color: v.$color--primary;
+    &__label {
+        position: absolute;
+        color: v.$color--quintenary--dark;
+        top: 39%;
+        left: 4rem;
+        transition: all .2s ease-in    ;
+        user-select: none;
+        pointer-events: none;
+    }
+    &__input-box {
+        border: 1px solid v.$color--quintenary--dark;
+        outline: none;
+        border-radius: 12px;
+        height: 42px;
+        width: 300px;
+        margin: 5px 0;
+        padding: 10px 30px;
+
+        &:focus ~ .input__label {
+            top: 0;
+            left: 0;
+        }
+    }
+    &__msg {
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+        font-size: 1rem;
+
+        &--error {
+            color: v.$color-error;
+        }
+    }
+}
