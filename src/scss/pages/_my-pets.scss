@@ -1,0 +1,46 @@
+@use "../abstracts/variables" as v;
+
+.my-pets {
+}
+
+.table {
+    width: 100%;
+    border-spacing: 30px 20px;
+}
+
+.table th,
+.table td {
+    height: 7rem;
+    background-color: red;
+    text-align: center;
+    border-radius: 6px;
+}
+
+.pet-photo {
+    display: block;
+    margin: 0 auto;
+    // max-width: 150px; /* Limita el ancho máximo de la imagen a 150px */
+    width: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* Establece el ancho de la columna de la imagen */
+.table th:nth-child(2),
+.table td:nth-child(2) {
+    width: 150px;
+    height: 100px;
+}
+
+// .list {
+//     &__row {
+//         display: grid;
+//         grid-template-columns: repeat(auto-fit, minmax(1px, 1fr));
+//         gap: 5px;
+//         &__cell {
+//             height: 50px;
+//             margin: 5px;
+//             background-color: red;
+//         }
+//     }
+// }
