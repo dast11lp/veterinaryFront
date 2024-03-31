@@ -10,10 +10,9 @@
 
 .table th,
 .table td {
-    height: 7rem;
-    background-color: red;
     text-align: center;
     border-radius: 6px;
+    background-color: v.$color--secundary;
 }
 
 .pet-photo {
@@ -32,15 +31,16 @@
     height: 100px;
 }
 
-// .list {
-//     &__row {
-//         display: grid;
-//         grid-template-columns: repeat(auto-fit, minmax(1px, 1fr));
-//         gap: 5px;
-//         &__cell {
-//             height: 50px;
-//             margin: 5px;
-//             background-color: red;
-//         }
-//     }
-// }
+.manager {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+}
+
+
+
+.css-1wy8uaa-MuiButtonBase-root-MuiPickersDay-root {
+    font-size: 50px;
+}

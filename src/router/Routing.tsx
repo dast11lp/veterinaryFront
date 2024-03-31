@@ -7,6 +7,7 @@ import { MyPets } from "../components/MyPets"
 import { UserRegister } from "../components/UserRegister"
 import { Login } from "../components/Login"
 import { PetRegister } from "../components/PetRegister"
+import { AddAppointment } from "../components/AddAppointment"
 
 export const Routing = () => {
     return (
@@ -25,6 +26,7 @@ export const Routing = () => {
                                 <Route path="/registro" element={<UserRegister />} />
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/registro/mascota" element={<PetRegister />} />
+                                <Route path="/agendarcita/:id" element={<AddAppointment />} />
                             </Route>
                             <Route path="/private">
 
