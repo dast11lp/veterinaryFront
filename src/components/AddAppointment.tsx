@@ -17,15 +17,27 @@ export const AddAppointment = () => {
 
     const [appointment, setAppointment] = useState<Dayjs | null>(dayjs());
     const [selectedDate, setSelectedDate] = useState()
+    const [hours, setHours] = useState([]);
 
-    const shouldDisableDate = (date) => {
-        // return !listAppointments.some((appoint) => appoint.date === date.$d.toLocaleDateString())
+    const shouldDisableDate = (calendarDate) => {
+        return !Object.keys(listAppointments).some((appointDate) => appointDate === calendarDate.$d.toLocaleDateString())
     }
 
-    const handleDate = (newValue) => {
-        // setDate(newValue.$d.toLocaleDateString());
-        console.log(newValue.$d.toLocaleDateString());
-        
+    const handleDate = (date) => {
+        // console.log(newValue.$d.toLocaleDateString());
+        // console.log(listAppointments);
+        const myDate = date.$d.toLocaleDateString()
+
+        Object.values(listAppointments).forEach((key, i) => {
+            if(key[i]) {
+                console.log(myDate, key[i].date);
+            }
+            // if(myDate === key) {
+            //     setHours()
+            // }
+            
+        })
+
     }
 
     useEffect(() => {
@@ -54,6 +66,15 @@ export const AddAppointment = () => {
                     </div>
                 </DemoContainer>
             </LocalizationProvider>
+
+            < select name="" id="">
+                <option value="">----</option>
+                {hours && hours.map((hour) => (
+                    <>
+                        <option value="">{hour}</option>
+                    </>
+                ))}
+            </select>
         </div>
 
     )
