@@ -15,35 +15,34 @@ export const AddAppointment = () => {
     const dispatch = useAppDispatch()
     const listAppointments = useSelector((state) => state.appointmentReducer.listAppointments)
 
-    const [appointment, setAppointment] = useState<Dayjs | null>(dayjs());
-    const [selectedDate, setSelectedDate] = useState()
+    const [appointment] = useState<Dayjs | null>(dayjs());
     const [hours, setHours] = useState([]);
 
     const shouldDisableDate = (calendarDate) => {
         return !Object.keys(listAppointments).some((appointDate) => appointDate === calendarDate.$d.toLocaleDateString())
     }
 
-    const handleDate = (date) => {
-        // console.log(newValue.$d.toLocaleDateString());
-        // console.log(listAppointments);
-        const myDate = date.$d.toLocaleDateString()
+    const handleDate = (calendarDate) => {
+        setHours([])
+        const myDate = calendarDate.$d.toLocaleDateString()
 
-        Object.values(listAppointments).forEach((key, i) => {
-            if(key[i]) {
-                console.log(myDate, key[i].date);
+        Object.keys(listAppointments).forEach((key, i) => {
+            if (myDate === key) {
+
+                listAppointments[key].forEach((el) => {
+                    console.log(el.hour);
+                    
+                    setHours((prevHours => [...prevHours, el.hour]))
+                });
             }
-            // if(myDate === key) {
-            //     setHours()
-            // }
-            
         })
-
     }
 
     useEffect(() => {
         dispatch(resetAppointmentSlice())
     }, [])
 
+    useEffect(()=> {}, [hours])
 
 
     useEffect(() => {
@@ -66,12 +65,12 @@ export const AddAppointment = () => {
                     </div>
                 </DemoContainer>
             </LocalizationProvider>
-
+                        <h2>Hora de la Cita</h2>
             < select name="" id="">
                 <option value="">----</option>
-                {hours && hours.map((hour) => (
+                {hours.length > 0 && hours.map((hour) => (
                     <>
-                        <option value="">{hour}</option>
+                        <option value="hours">{hour}</option>
                     </>
                 ))}
             </select>
