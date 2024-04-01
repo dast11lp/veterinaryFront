@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../app/store';
 import { getListAppointmentsThunk } from '../api/appointments';
 import { useSelector } from 'react-redux';
+import { resetAppointmentSlice } from '../features/appointment/appointmentSlice';
 
 
 export const AddAppointment = () => {
@@ -15,19 +16,28 @@ export const AddAppointment = () => {
     const listAppointments = useSelector((state) => state.appointmentReducer.listAppointments)
 
     const [appointment, setAppointment] = useState<Dayjs | null>(dayjs());
+    const [selectedDate, setSelectedDate] = useState()
+
+    const shouldDisableDate = (date) => {
+        return !listAppointments.some((appoint) => appoint.date === date.$d.toLocaleDateString())
+    }
+
+    const handleDate = (newValue) => {
+        // setDate(newValue.$d.toLocaleDateString());
+        console.log(newValue.$d.toLocaleDateString());
+        
+    }
+
+    useEffect(() => {
+        dispatch(resetAppointmentSlice())
+    }, [])
+
 
 
     useEffect(() => {
         if (listAppointments.length === 0)
             dispatch(getListAppointmentsThunk())
-        console.log(listAppointments);
-    }, [listAppointments])
-
-    useEffect(() => {
-        if (appointment) {
-            // console.log(Intl.DateTimeFormat().format((appointment.$d)))
-        }
-    }, [appointment])
+    }, [listAppointments, dispatch])
 
     return (
         <div className='add-Appointment'>
@@ -35,15 +45,13 @@ export const AddAppointment = () => {
 
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['DateCalendar', 'DateCalendar']}>
-                    {/* <DemoItem label="Controlled calendar"> */}
                     <div>
                         <DateCalendar sx={{
                             "& .MuiButtonBase-root, & .MuiTypography-root, & .MuiPickersYear-yearButton ,& .css-31ca4x-MuiPickersFadeTransitionGroup-root": {
                                 fontSize: '1.6rem',
                             }
-                        }} value={appointment} onChange={(newValue) => setAppointment(newValue)} minDate={dayjs()} />
+                        }} value={appointment} onChange={(newValue) => handleDate(newValue)} minDate={dayjs()} shouldDisableDate={shouldDisableDate} />
                     </div>
-                    {/* </DemoItem> */}
                 </DemoContainer>
             </LocalizationProvider>
         </div>
