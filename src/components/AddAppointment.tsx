@@ -19,7 +19,7 @@ export const AddAppointment = () => {
     const [selectedDate, setSelectedDate] = useState()
 
     const shouldDisableDate = (date) => {
-        return !listAppointments.some((appoint) => appoint.date === date.$d.toLocaleDateString())
+        // return !listAppointments.some((appoint) => appoint.date === date.$d.toLocaleDateString())
     }
 
     const handleDate = (newValue) => {

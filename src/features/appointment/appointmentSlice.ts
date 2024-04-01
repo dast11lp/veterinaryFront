@@ -26,11 +26,16 @@ const appointmentSlice = createSlice({
         builder.addCase(getListAppointmentsThunk.fulfilled, (state, action) => {
             state.loading = false;
             state.error = false;
+            const map = new Map ();
 
-            action.payload.forEach((el) => {
+            action.payload.forEach((el)=> {
                 const date = new Date(el.date).toLocaleDateString();
-                state.listAppointments.push({...el, date})
-            });
+                if(!map.has(date)) {
+                    map.set(date, [])
+                }
+                map.get(date).push(el)
+            })
+            state.listAppointments = Object.fromEntries(map);
         })
 
         builder.addCase(getListAppointmentsThunk.rejected, (state) => {
