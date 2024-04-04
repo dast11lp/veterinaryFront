@@ -8,42 +8,46 @@ import { useAppDispatch } from '../app/store';
 import { getListAppointmentsThunk } from '../api/appointments';
 import { useSelector } from 'react-redux';
 import { resetAppointmentSlice } from '../features/appointment/appointmentSlice';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { useParams } from 'react-router-dom';
+import { Controller, useForm } from 'react-hook-form';
 
 
 export const AddAppointment = () => {
+
+    const { id } = useParams()
+    const { handleSubmit, control, register } = useForm()
 
     const dispatch = useAppDispatch()
     const listAppointments = useSelector((state) => state.appointmentReducer.listAppointments)
 
     const [appointment] = useState<Dayjs | null>(dayjs());
-    const [hours, setHours] = useState([]);
+    const [date, setDate] = useState([])
+
 
     const shouldDisableDate = (calendarDate) => {
         return !Object.keys(listAppointments).some((appointDate) => appointDate === calendarDate.$d.toLocaleDateString())
     }
 
     const handleDate = (calendarDate) => {
-        setHours([])
         const myDate = calendarDate.$d.toLocaleDateString()
+        const filteredAppointments = Object.keys(listAppointments)
+            .filter(key => key === myDate)
+            .map(key => listAppointments[key])
+            .flat();
 
-        Object.keys(listAppointments).forEach((key, i) => {
-            if (myDate === key) {
-
-                listAppointments[key].forEach((el) => {
-                    console.log(el.hour);
-                    
-                    setHours((prevHours => [...prevHours, el.hour]))
-                });
-            }
-        })
+        setDate(filteredAppointments);
     }
+
+    const onSubmit = (data) => {
+        console.log(data);
+
+    }
+
 
     useEffect(() => {
         dispatch(resetAppointmentSlice())
     }, [])
-
-    useEffect(()=> {}, [hours])
-
 
     useEffect(() => {
         if (listAppointments.length === 0)
@@ -65,15 +69,36 @@ export const AddAppointment = () => {
                     </div>
                 </DemoContainer>
             </LocalizationProvider>
-                        <h2>Hora de la Cita</h2>
-            < select name="" id="">
-                <option value="">----</option>
-                {hours.length > 0 && hours.map((hour) => (
-                    <>
-                        <option value="hours">{hour}</option>
-                    </>
-                ))}
-            </select>
+            <h2>Hora de la Cita</h2>
+
+
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                    <InputLabel id="demo-select-small-label">Hora de la cita</InputLabel>
+                    <Controller
+                        name='appointmentTime'
+                        control={control}
+                        defaultValue={date && date.length > 0 ? date[0].id : ""}
+                        render={({ field }) => (
+                            <Select
+                                {...field}
+                                labelId="demo-select-small-label"
+                                id="demo-select-small"
+                                label="Hora de la cita"
+                            >
+                                {date && date.map((appoint) => (
+                                    <MenuItem key={appoint.id} value={appoint.id}>{appoint.hour}</MenuItem>
+                                ))}
+                            </Select>
+                        )}
+                    />
+                </FormControl>
+                <input type="submit" value="Enviar" />
+            </form>
+
+
+
+
         </div>
 
     )
