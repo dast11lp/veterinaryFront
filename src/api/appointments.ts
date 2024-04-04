@@ -30,6 +30,17 @@ const reserveAppointmentFetch = async (data) => {
     return await request.json()
 }
 
+const getPetAppointmentsFetch = async (idPet) => {
+    const request = await fetch(`${backend}pet/my-appointments/${idPet}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+    return await request.json()
+}
+
 export const getListAppointmentsThunk = createAsyncThunk(
     'appointment/list',
     async () => {
@@ -42,6 +53,14 @@ export const reserveAppointmentThunk = createAsyncThunk(
     'appointment/request',
     async (data: any) => {
         const request = await reserveAppointmentFetch(data)
+        return await request
+    }
+)
+
+export const getPetAppointmentsThunk = createAsyncThunk(
+    '/pet/my-appointments/',
+    async (idPet: any) => {
+        const request = await getPetAppointmentsFetch(idPet)
         return await request
     }
 )

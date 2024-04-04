@@ -42,7 +42,7 @@ export const MyPets = () => {
                 <td>{pet.name}</td>
                 <td className="manager">
                   <Link to="">Perfil</Link>
-                  <Link to="">Citas Agendadas</Link>
+                  <Link to={`/citas/${pet.id}/${pet.name}`}>Citas Agendadas</Link>
                   <Link to={`/agendarcita/${pet.id}`}>Agendar Cita</Link>
                   </td>
               </tr>

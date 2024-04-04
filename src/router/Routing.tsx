@@ -8,6 +8,7 @@ import { UserRegister } from "../components/UserRegister"
 import { Login } from "../components/Login"
 import { PetRegister } from "../components/PetRegister"
 import { AddAppointment } from "../components/AddAppointment"
+import { ListAppointmentsByPet } from "../components/ListAppointmentsByPet"
 
 export const Routing = () => {
     return (
@@ -27,6 +28,7 @@ export const Routing = () => {
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/registro/mascota" element={<PetRegister />} />
                                 <Route path="/agendarcita/:idPet" element={<AddAppointment />} />
+                                <Route path="/citas/:idPet/:namePet" element={<ListAppointmentsByPet />} />
                             </Route>
                             <Route path="/private">
 
