@@ -7,7 +7,7 @@ const initialState = {
     error: false,
 }
 
-const appointmentSlice = createSlice({
+const getAppointmentsSlice = createSlice({
     name: "appointment",
     initialState,
     reducers: {
@@ -46,6 +46,6 @@ const appointmentSlice = createSlice({
     }
 })
 
-export default appointmentSlice.reducer;
+export default getAppointmentsSlice.reducer;
 
-export const { resetAppointmentSlice } = appointmentSlice.actions;
+export const { resetAppointmentSlice } = getAppointmentsSlice.actions;

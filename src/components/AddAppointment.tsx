@@ -5,9 +5,9 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import dayjs, { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../app/store';
-import { getListAppointmentsThunk } from '../api/appointments';
+import { getListAppointmentsThunk, reserveAppointmentThunk } from '../api/appointments';
 import { useSelector } from 'react-redux';
-import { resetAppointmentSlice } from '../features/appointment/appointmentSlice';
+import { resetAppointmentSlice } from '../features/appointment/getAppointmentSlice';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
@@ -15,14 +15,15 @@ import { Controller, useForm } from 'react-hook-form';
 
 export const AddAppointment = () => {
 
-    const { id } = useParams()
+    const { idPet } = useParams()
     const { handleSubmit, control, register } = useForm()
 
     const dispatch = useAppDispatch()
-    const listAppointments = useSelector((state) => state.appointmentReducer.listAppointments)
+    const listAppointments = useSelector((state) => state.getAppointmentsReducer.listAppointments)
 
     const [appointment] = useState<Dayjs | null>(dayjs());
     const [date, setDate] = useState([])
+    const [isDisabled, setIsDisabled] = useState(true)
 
 
     const shouldDisableDate = (calendarDate) => {
@@ -40,10 +41,14 @@ export const AddAppointment = () => {
     }
 
     const onSubmit = (data) => {
-        console.log(data);
 
+        const appointData = {
+            idAppoint: data.appointmentTime,
+            idUser: JSON.parse(localStorage.getItem("userInfo")).id,
+            idPet
+        }
+        dispatch(reserveAppointmentThunk(appointData))
     }
-
 
     useEffect(() => {
         dispatch(resetAppointmentSlice())
@@ -54,25 +59,40 @@ export const AddAppointment = () => {
             dispatch(getListAppointmentsThunk())
     }, [listAppointments, dispatch])
 
+    const dateCalendarStyles = {
+        "& .MuiButtonBase-root": {
+            fontSize: '1.6rem',
+        },
+        "& .MuiTypography-root": {
+            fontSize: '1.6rem',
+        },
+        "& .MuiPickersYear-yearButton": {
+            fontSize: '1.6rem',
+        },
+        "& .css-31ca4x-MuiPickersFadeTransitionGroup-root": {
+            fontSize: '1.6rem',
+        },
+    };
+
     return (
         <div className='add-Appointment'>
             <h2>Agendar cita para</h2>
 
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['DateCalendar', 'DateCalendar']}>
-                    <div>
-                        <DateCalendar sx={{
-                            "& .MuiButtonBase-root, & .MuiTypography-root, & .MuiPickersYear-yearButton ,& .css-31ca4x-MuiPickersFadeTransitionGroup-root": {
-                                fontSize: '1.6rem',
-                            }
-                        }} value={appointment} onChange={(newValue) => handleDate(newValue)} minDate={dayjs()} shouldDisableDate={shouldDisableDate} />
-                    </div>
+                    <DateCalendar
+                        sx={dateCalendarStyles}
+                        value={appointment}
+                        onChange={(newValue) => handleDate(newValue)}
+                        minDate={dayjs()}
+                        shouldDisableDate={shouldDisableDate} />
                 </DemoContainer>
             </LocalizationProvider>
-            <h2>Hora de la Cita</h2>
 
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+
+            <form onSubmit={handleSubmit(onSubmit)} className='select-hour'>
+                <h4>Fecha: {date.length > 0 && date[0].date}</h4>
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                     <InputLabel id="demo-select-small-label">Hora de la cita</InputLabel>
                     <Controller
@@ -85,6 +105,10 @@ export const AddAppointment = () => {
                                 labelId="demo-select-small-label"
                                 id="demo-select-small"
                                 label="Hora de la cita"
+                                onChange={(e) => {
+                                    setIsDisabled(false);
+                                    field.onChange(e);
+                                }}
                             >
                                 {date && date.map((appoint) => (
                                     <MenuItem key={appoint.id} value={appoint.id}>{appoint.hour}</MenuItem>
@@ -93,12 +117,12 @@ export const AddAppointment = () => {
                         )}
                     />
                 </FormControl>
-                <input type="submit" value="Enviar" />
+                <input
+                    type="submit"
+                    value="Enviar"
+                    disabled={isDisabled}
+                    className={`btn ${isDisabled ? 'btn--disabled' : ""}`} />
             </form>
-
-
-
-
         </div>
 
     )

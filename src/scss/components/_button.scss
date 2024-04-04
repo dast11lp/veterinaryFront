@@ -23,4 +23,15 @@
     &:active {
         transform: translateY(5px);
     }
+
+    &--disabled {
+        transition: none;
+        background-color: #cccccc7e;
+        color: #272727a8;
+        
+        &:hover,
+        &:active {
+            transform: none;
+        }
+    }
 }

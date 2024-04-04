@@ -26,7 +26,7 @@ export const Routing = () => {
                                 <Route path="/registro" element={<UserRegister />} />
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/registro/mascota" element={<PetRegister />} />
-                                <Route path="/agendarcita/:id" element={<AddAppointment />} />
+                                <Route path="/agendarcita/:idPet" element={<AddAppointment />} />
                             </Route>
                             <Route path="/private">
 
