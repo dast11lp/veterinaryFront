@@ -4,40 +4,45 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import dayjs, { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from '../app/store';
+import { RootState, useAppDispatch } from '../app/store';
 import { getListAppointmentsThunk, reserveAppointmentThunk } from '../api/appointments';
 import { useSelector } from 'react-redux';
 import { resetAppointmentSlice } from '../features/appointment/getAppointmentSlice';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
+import { Appointment } from '../types/Appointment';
 
 
 export const AddAppointment = () => {
 
     const { idPet } = useParams()
-    const { handleSubmit, control, register } = useForm()
+    const { handleSubmit, control } = useForm();
 
     const dispatch = useAppDispatch()
-    const listAppointments = useSelector((state) => state.getAppointmentsReducer.listAppointments)
+    const listAppointments = useSelector((state: RootState) => state.getAppointmentsReducer.listAppointments)
 
     const [appointment] = useState<Dayjs | null>(dayjs());
-    const [date, setDate] = useState([])
+    const [date, setDate] = useState<Appointment[]>([])
     const [isDisabled, setIsDisabled] = useState(true)
 
 
-    const shouldDisableDate = (calendarDate) => {
-        return !Object.keys(listAppointments).some((appointDate) => appointDate === calendarDate.$d.toLocaleDateString())
+    const shouldDisableDate = (calendarDate: Dayjs) => {
+        return !Object.keys(listAppointments).some((appointDate) => appointDate === calendarDate.toDate().toLocaleDateString())
     }
 
-    const handleDate = (calendarDate) => {
-        const myDate = calendarDate.$d.toLocaleDateString()
-        const filteredAppointments = Object.keys(listAppointments)
-            .filter(key => key === myDate)
-            .map(key => listAppointments[key])
+
+    const handleDate = (calendarDate: Dayjs) => {
+        const myDate: string = calendarDate.toDate().toLocaleDateString();
+
+        const filteredAppointments: string[] = Object.keys(listAppointments)
+            .filter((key: string) => key === myDate)
+            .map((key: string) => listAppointments[key])
             .flat();
 
         setDate(filteredAppointments);
+
+
     }
 
     const onSubmit = (data) => {

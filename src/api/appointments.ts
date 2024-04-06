@@ -6,7 +6,7 @@ const backend = "http://localhost:8080/"
 const getListAppointmentsFetch = async () => {
     const id = JSON.parse(localStorage.getItem("userInfo")).id
     if (id) {
-        const request = await fetch(`${backend}appointment/list?idUser=${id}`, {
+        const request = await fetch(`${backend}appointment/dates?idUser=${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -15,6 +15,18 @@ const getListAppointmentsFetch = async () => {
         })
         return await request.json()
     }
+}
+
+const getListHoursFetch = async () => {
+    const id = JSON.parse(localStorage.getItem("userInfo")).id
+    const request = await fetch(`${backend}appointment/hours?idUser=${id}`, {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    })
+    return await request.json();
 }
 
 const reserveAppointmentFetch = async (data) => {
@@ -46,6 +58,14 @@ export const getListAppointmentsThunk = createAsyncThunk(
     async () => {
         const request = await getListAppointmentsFetch();
         return await request;
+    }
+)
+
+export const getListHoursThunk = createAsyncThunk(
+    '/appointment/hours',
+    async () => {
+        const response = await getListHoursFetch();
+        return await response;
     }
 )
 

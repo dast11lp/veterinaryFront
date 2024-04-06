@@ -29,7 +29,7 @@ export const ListAppointmentsByPet = () => {
                     <p><strong>Veterinario: </strong>{petAppointments[0]?.veterinarian?.firstname}</p>
                 </div>
             ) : (
-                <p>No hay citas disponibles.</p>
+                <p>No hay citas Agendadas</p>
             )}
         </div>
     )

@@ -1,12 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { UserData, UserLogin } from "../types/User.type";
 
-const backend: string = "http://localhost:8080/owner/";
-const backend2: string = "http://localhost:8080/";
+const backend: string = "http://localhost:8080/";
 
 const registerUserFetch = async (body: UserData) => {
     
-    const request = await fetch(`${backend}register`, {
+    const request = await fetch(`${backend}owner/register`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -14,11 +13,11 @@ const registerUserFetch = async (body: UserData) => {
         body: JSON.stringify(body),
     });
     const response = await request.json();
-    return await response
+    return await response;
 }
 
 const loginFetch = async (data: UserLogin) => {
-    const request = await fetch(`${backend2}auth/login?email=${data.email}&password=${data.password}`, {
+    const request = await fetch(`${backend}auth/login?email=${data.email}&password=${data.password}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

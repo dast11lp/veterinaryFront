@@ -6,16 +6,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { registerFormRules } from '../helpers';
 import { UserData } from '../types/User.type';
 
-interface Inputs extends UserData{}
-
-
-
 export const UserRegister = () => {
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>({ mode: 'all' });
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<UserData>({ mode: 'all' });
     const dispatch = useAppDispatch();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const onSubmit: SubmitHandler<UserData> = (data) => {
         dispatch(registerUserThunk(data))
     };
 
