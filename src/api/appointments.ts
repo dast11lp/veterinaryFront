@@ -13,20 +13,32 @@ const getListAppointmentsFetch = async () => {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
         })
-        return await request.json()
+        if (!request.ok)
+            throw Error(request.status.toString())
+        else
+            return await request.json()
     }
 }
 
-const getListHoursFetch = async () => {
+const getListHoursFetch = async (date: string) => {
+
     const id = JSON.parse(localStorage.getItem("userInfo")).id
-    const request = await fetch(`${backend}appointment/hours?idUser=${id}`, {
+
+    const [day, month, year] = date.split("/");
+
+    const dateFormated = `${year}-${month <= 9 ? '0' + month : month}-${day <= 9 ? '0' + day : day} `
+
+    const request = await fetch(`${backend}appointment/hours?idUser=${id}&date=${dateFormated}`, {
         method: "GET",
         headers: {
             "Content-type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
     })
-    return await request.json();
+    if (!request.ok)
+        throw Error(request.status.toString())
+    else
+        return await request.json()
 }
 
 const reserveAppointmentFetch = async (data) => {
@@ -39,7 +51,10 @@ const reserveAppointmentFetch = async (data) => {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
         });
-    return await request.json()
+    if (!request.ok)
+        throw Error(request.status.toString())
+    else
+        return await request.json()
 }
 
 const getPetAppointmentsFetch = async (idPet) => {
@@ -50,7 +65,10 @@ const getPetAppointmentsFetch = async (idPet) => {
             Authorization: `Bearer ${localStorage.getItem('token')}`
         }
     });
-    return await request.json()
+    if (!request.ok)
+        throw Error(request.status.toString())
+    else
+        return await request.json()
 }
 
 export const getListAppointmentsThunk = createAsyncThunk(
@@ -63,8 +81,8 @@ export const getListAppointmentsThunk = createAsyncThunk(
 
 export const getListHoursThunk = createAsyncThunk(
     '/appointment/hours',
-    async () => {
-        const response = await getListHoursFetch();
+    async (date: string) => {
+        const response = await getListHoursFetch(date);
         return await response;
     }
 )

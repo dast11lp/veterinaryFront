@@ -32,11 +32,13 @@ const getAppointmentsSlice = createSlice({
 
             // create an map with date as key and its array of hours as value
             action.payload.forEach((el) => {
-                const date = new Date(el.date).toLocaleDateString();
-                if (!map.has(date)) {
-                    map.set(date, [])
+                const date = new Date(el.date);
+                date.setDate(date.getDate() + 1)
+                const formatdate = date.toLocaleDateString();
+                if (!map.has(formatdate)) {
+                    map.set(formatdate, [])
                 }
-                map.get(date).push({ ...el, date })
+                map.get(formatdate).push({ ...el, formatdate })
             })
             state.listAppointments = Object.fromEntries(map);
         })

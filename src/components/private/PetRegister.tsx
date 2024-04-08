@@ -1,12 +1,10 @@
-import { registerUserThunk } from '../api/auth';
-import { Input } from './Input';
-import { useAppDispatch } from '../app/store';
+import { Input } from '../Input';
+import { useAppDispatch } from '../../app/store';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { registerPetFormRules } from '../helpers';
-import { PetData, UserData } from '../types/User.type';
-import { registerPetThunk } from '../api/pet';
+import { registerPetFormRules } from '../../helpers';
+import { registerPetThunk } from '../../api/pet';
+import { PetData } from '../../types/Pet.types';
 
-interface PetData { }
 
 export const PetRegister = () => {
 

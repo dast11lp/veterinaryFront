@@ -6,9 +6,9 @@ import { Services } from "../components/Services"
 import { MyPets } from "../components/MyPets"
 import { UserRegister } from "../components/UserRegister"
 import { Login } from "../components/Login"
-import { PetRegister } from "../components/PetRegister"
-import { AddAppointment } from "../components/AddAppointment"
-import { ListAppointmentsByPet } from "../components/ListAppointmentsByPet"
+import { PetRegister } from "../components/private/PetRegister"
+import { AddAppointment } from "../components/private/AddAppointment"
+import { ListAppointmentsByPet } from "../components/private/ListAppointmentsByPet"
 
 export const Routing = () => {
     return (

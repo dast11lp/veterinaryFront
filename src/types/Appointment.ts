@@ -12,3 +12,9 @@ export interface Appointment {
     veterinarian: Veterinarian,
 }
 
+export interface hourDate {
+    id: number, 
+    veterinarian: string, 
+    hour: string,
+}
+

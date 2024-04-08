@@ -4,16 +4,19 @@ import { PetData } from "../types/Pet.types";
 const backend: string = "http://localhost:8080/owner/";
 
 const registerPetFetch = async (body: PetData) => {
-   
-        const request = await fetch(`${backend}owner/pet/save`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body)
-        });
+
+    const request = await fetch(`${backend}owner/pet/save`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    });
+    if (!request.ok)
+        throw Error(request.status.toString())
+    else
         return await request.json()
-    
+
 }
 
 const getPetListFetch = async (idUser: number) => {
@@ -24,7 +27,10 @@ const getPetListFetch = async (idUser: number) => {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
     })
-    return await request.json();
+    if (!request.ok)
+        throw Error(request.status.toString())
+    else
+        return await request.json()
 }
 
 

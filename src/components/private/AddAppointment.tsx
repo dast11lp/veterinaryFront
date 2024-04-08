@@ -4,14 +4,14 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import dayjs, { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
-import { RootState, useAppDispatch } from '../app/store';
-import { getListAppointmentsThunk, reserveAppointmentThunk } from '../api/appointments';
+import { RootState, useAppDispatch } from '../../app/store';
+import { getListAppointmentsThunk, getListHoursThunk, reserveAppointmentThunk } from '../../api/appointments';
 import { useSelector } from 'react-redux';
-import { resetAppointmentSlice } from '../features/appointment/getAppointmentSlice';
+import { resetAppointmentSlice } from '../../features/appointment/getAppointmentSlice';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
-import { Appointment } from '../types/Appointment';
+import { Appointment } from '../../types/Appointment';
 
 
 export const AddAppointment = () => {
@@ -21,9 +21,8 @@ export const AddAppointment = () => {
 
     const dispatch = useAppDispatch()
     const listAppointments = useSelector((state: RootState) => state.getAppointmentsReducer.listAppointments)
-
+    const listHours = useSelector((state: RootState) => state.getAppointmentsReducer.listHours)
     const [appointment] = useState<Dayjs | null>(dayjs());
-    const [date, setDate] = useState<Appointment[]>([])
     const [isDisabled, setIsDisabled] = useState(true)
 
 
@@ -34,15 +33,7 @@ export const AddAppointment = () => {
 
     const handleDate = (calendarDate: Dayjs) => {
         const myDate: string = calendarDate.toDate().toLocaleDateString();
-
-        const filteredAppointments: string[] = Object.keys(listAppointments)
-            .filter((key: string) => key === myDate)
-            .map((key: string) => listAppointments[key])
-            .flat();
-
-        setDate(filteredAppointments);
-
-
+        dispatch(getListHoursThunk(myDate))
     }
 
     const onSubmit = (data) => {
@@ -97,13 +88,13 @@ export const AddAppointment = () => {
 
 
             <form onSubmit={handleSubmit(onSubmit)} className='select-hour'>
-                <h4>Fecha: {date.length > 0 && date[0].date}</h4>
+                {/* <h4>Fecha: {date.length > 0 && "date"}</h4> */}
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                     <InputLabel id="demo-select-small-label">Hora de la cita</InputLabel>
                     <Controller
                         name='appointmentTime'
                         control={control}
-                        defaultValue={date && date.length > 0 ? date[0].id : ""}
+                        // defaultValue={date && date.length > 0 ? date[0].id : ""}
                         render={({ field }) => (
                             <Select
                                 {...field}
@@ -115,7 +106,7 @@ export const AddAppointment = () => {
                                     field.onChange(e);
                                 }}
                             >
-                                {date && date.map((appoint) => (
+                                {listHours && listHours.map((appoint) => (
                                     <MenuItem key={appoint.id} value={appoint.id}>{appoint.hour}</MenuItem>
                                 ))}
                             </Select>

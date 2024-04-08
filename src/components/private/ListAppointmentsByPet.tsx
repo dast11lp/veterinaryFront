@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useAppDispatch } from '../app/store'
+import { useAppDispatch } from '../../app/store'
 import { useParams } from 'react-router-dom'
-import { getPetAppointmentsThunk } from '../api/appointments'
+import { getPetAppointmentsThunk } from '../../api/appointments'
 
 export const ListAppointmentsByPet = () => {
 
