@@ -34,14 +34,10 @@ export const authSlice = createSlice({
       if (userInfoString !== null) {
         const id = JSON.parse(userInfoString);
         state.userInfo = id;
-      } else {
-        throw Error("userInfoString is null ")
       }
 
       if (token !== null) {
         state.userToken = token;
-      } else {
-        throw Error("token is null ")
       }
     }
   },
@@ -69,7 +65,7 @@ export const authSlice = createSlice({
     builder.addCase(loginThunk.fulfilled, (state, action: PayloadAction<Authorization>) => {
       state.userToken = action.payload.Authorization
       state.userInfo = {
-        Authorization : action.payload.Authorization,
+        Authorization: action.payload.Authorization,
         id: action.payload.id
       }
       localStorage.setItem("userInfo", JSON.stringify({
