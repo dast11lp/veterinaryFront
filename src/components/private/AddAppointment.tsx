@@ -11,18 +11,23 @@ import { resetAppointmentSlice } from '../../features/appointment/getAppointment
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
-import { Appointment } from '../../types/Appointment';
 
+// id de la fecha seleccioanda en el select
+interface appointmentTime {
+    appointmentTime: number;
+}
 
 export const AddAppointment = () => {
 
     const { idPet } = useParams()
-    const { handleSubmit, control } = useForm();
+    const { handleSubmit, control } = useForm<appointmentTime>();
 
     const dispatch = useAppDispatch()
     const listAppointments = useSelector((state: RootState) => state.getAppointmentsReducer.listAppointments)
     const listHours = useSelector((state: RootState) => state.getAppointmentsReducer.listHours)
+    const idUser = useSelector((state: RootState) => state.authReducer.userInfo?.id)
     const [appointment] = useState<Dayjs | null>(dayjs());
+    const [date, setDate] = useState<string>("");
     const [isDisabled, setIsDisabled] = useState(true)
 
 
@@ -33,14 +38,14 @@ export const AddAppointment = () => {
 
     const handleDate = (calendarDate: Dayjs) => {
         const myDate: string = calendarDate.toDate().toLocaleDateString();
+        setDate(myDate);
         dispatch(getListHoursThunk(myDate))
     }
 
-    const onSubmit = (data) => {
-
+    const onSubmit = (data: appointmentTime) => {
         const appointData = {
             idAppoint: data.appointmentTime,
-            idUser: JSON.parse(localStorage.getItem("userInfo")).id,
+            idUser,
             idPet
         }
         dispatch(reserveAppointmentThunk(appointData))
@@ -88,13 +93,13 @@ export const AddAppointment = () => {
 
 
             <form onSubmit={handleSubmit(onSubmit)} className='select-hour'>
-                {/* <h4>Fecha: {date.length > 0 && "date"}</h4> */}
+                <h4>Fecha: {date}</h4>
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                     <InputLabel id="demo-select-small-label">Hora de la cita</InputLabel>
                     <Controller
                         name='appointmentTime'
                         control={control}
-                        // defaultValue={date && date.length > 0 ? date[0].id : ""}
+                        defaultValue={listHours && listHours.length > 0 ? listHours[0].id : 0}
                         render={({ field }) => (
                             <Select
                                 {...field}

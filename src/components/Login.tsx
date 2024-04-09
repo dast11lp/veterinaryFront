@@ -4,17 +4,17 @@ import { registerFormRules } from "../helpers"
 import { useAppDispatch } from "../app/store"
 import { loginThunk } from "../api/auth"
 
+export interface InputsLogin {
+  email: string,
+  password: string
+}
+
 export const Login = () => {
 
-  interface InputsLogin {
-    email: string,
-    password: string
-  }
-
-  const { handleSubmit ,register, watch, formState: { errors } } = useForm<InputsLogin>({ mode: 'all' })
+  const { handleSubmit, register, watch, formState: { errors } } = useForm<InputsLogin>({ mode: 'all' })
   const dispatch = useAppDispatch();
 
-  const onSubmit: SubmitHandler<InputsLogin> =(data) => {
+  const onSubmit: SubmitHandler<InputsLogin> = (data) => {
     dispatch(loginThunk(data));
   }
 

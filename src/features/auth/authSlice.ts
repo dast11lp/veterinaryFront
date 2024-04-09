@@ -9,15 +9,15 @@ export interface Authorization {
 
 export interface authState {
   loading: boolean,
-  userInfo: object,
+  userInfo: Authorization | null,
   userToken: string | null,
-  error: boolean | null | object, 
+  error: boolean | null | object,
   success: boolean,
 }
 
 const initialState: authState = {
   loading: false,
-  userInfo: {},
+  userInfo: null,
   userToken: null,
   error: null,
   success: false,
@@ -27,6 +27,23 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    verifyAuth: (state) => {
+      const token = localStorage.getItem("token")
+      const userInfoString = localStorage.getItem("userInfo");
+
+      if (userInfoString !== null) {
+        const id = JSON.parse(userInfoString);
+        state.userInfo = id;
+      } else {
+        throw Error("userInfoString is null ")
+      }
+
+      if (token !== null) {
+        state.userToken = token;
+      } else {
+        throw Error("token is null ")
+      }
+    }
   },
   extraReducers: (builder) => {
     //Register Handlers 
@@ -34,7 +51,7 @@ export const authSlice = createSlice({
       state.loading = true
       state.error = null
     })
-    builder.addCase(registerUserThunk.fulfilled, (state, action: PayloadAction<Authorization> ) => {
+    builder.addCase(registerUserThunk.fulfilled, (state, action: PayloadAction<Authorization>) => {
       state.userToken = action.payload.Authorization
       state.loading = false;
       state.error = true;
@@ -52,6 +69,7 @@ export const authSlice = createSlice({
     builder.addCase(loginThunk.fulfilled, (state, action: PayloadAction<Authorization>) => {
       state.userToken = action.payload.Authorization
       state.userInfo = {
+        Authorization : action.payload.Authorization,
         id: action.payload.id
       }
       localStorage.setItem("userInfo", JSON.stringify({
@@ -69,3 +87,5 @@ export const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
+export const { verifyAuth } = authSlice.actions;
+

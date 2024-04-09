@@ -1,21 +1,23 @@
 import { Input } from '../Input';
-import { useAppDispatch } from '../../app/store';
+import { RootState, useAppDispatch } from '../../app/store';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { registerPetFormRules } from '../../helpers';
 import { registerPetThunk } from '../../api/pet';
 import { PetData } from '../../types/Pet.types';
+import { useSelector } from 'react-redux';
 
 
 export const PetRegister = () => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<PetData>({ mode: 'all' });
+    const id = useSelector((state: RootState) => state.authReducer.userInfo?.id)
     const dispatch = useAppDispatch();
 
     const onSubmit: SubmitHandler<PetData> = (data) => {
-        const body = {
+        const body: PetData = {
             ...data,
             owner: {
-                id: JSON.parse(localStorage.getItem("userInfo")).id
+                id
             },
         }
         dispatch(registerPetThunk(body))

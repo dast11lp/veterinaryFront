@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useAppDispatch } from '../../app/store'
+import { RootState, useAppDispatch } from '../../app/store'
 import { useParams } from 'react-router-dom'
 import { getPetAppointmentsThunk } from '../../api/appointments'
 
@@ -8,7 +8,7 @@ export const ListAppointmentsByPet = () => {
 
     const { idPet, namePet } = useParams()
     const dispatch = useAppDispatch();
-    const petAppointments = useSelector((state) => state.getPetAppointmentsReducer.myPetAppointments)
+    const petAppointments = useSelector((state: RootState) => state.getPetAppointmentsReducer.myPetAppointments)
 
 
     useEffect(() => {

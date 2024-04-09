@@ -1,7 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { getListAppointmentsThunk, getListHoursThunk } from "../../api/appointments";
+import { Appointment, hourDate } from "../../types/Appointment";
 
-const initialState = {
+
+export interface initialState {
+    listHours: hourDate[];
+    listAppointments: Appointment[];
+    loading: boolean | null;
+    error: boolean | null;
+}
+
+
+const initialState: initialState = {
     listAppointments: [],
     listHours: [],
     loading: false,
@@ -25,7 +35,7 @@ const getAppointmentsSlice = createSlice({
             state.error = false;
         })
 
-        builder.addCase(getListAppointmentsThunk.fulfilled, (state, action) => {
+        builder.addCase(getListAppointmentsThunk.fulfilled, (state, action: PayloadAction<Appointment[]>) => {
             state.loading = false;
             state.error = false;
             const map = new Map();

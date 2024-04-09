@@ -1,7 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getPetAppointmentsThunk } from "../../api/appointments"
+import { Appointment } from "../../types/Appointment";
 
-const initialState = {
+export interface initialState {
+    myPetAppointments: Appointment[];
+    loading: boolean | null;
+    error: boolean | null;
+}
+
+
+const initialState: initialState = {
     myPetAppointments: [],
     loading: false,
     error: false,

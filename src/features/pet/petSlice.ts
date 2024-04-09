@@ -1,13 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getPetListThunk } from "../../api/pet"
+import { PetData } from "../../types/Pet.types"
 
+interface initialState {
+    loading: boolean,
+    error: boolean,
+    petList: PetData[],
+}
 
-
-const initialState = {
+const initialState: initialState = {
     loading: false,
     error: false,
-    success: false,
-    petList: null,
+    petList: [],
 }
 
 const petSlice = createSlice({

@@ -2,10 +2,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { PetData } from "../types/Pet.types";
 
 const backend: string = "http://localhost:8080/owner/";
+const backend2: string = "http://localhost:8080/";
 
 const registerPetFetch = async (body: PetData) => {
 
-    const request = await fetch(`${backend}owner/pet/save`, {
+    const request = await fetch(`${backend2}pet/save`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

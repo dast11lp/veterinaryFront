@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
-import { useAppDispatch } from "../app/store"
+import { RootState, useAppDispatch } from "../app/store"
 import { getPetListThunk } from "../api/pet";
 import { useSelector } from "react-redux";
 // import { Calendar } from "./Calendar"
@@ -9,7 +9,7 @@ export const MyPets = () => {
 
   const dispatch = useAppDispatch();
 
-  const petList = useSelector(state => state.petReducer.petList)
+  const petList = useSelector((state:RootState) => state.petReducer.petList)
 
   useEffect(() => {
     const userInfo = localStorage.getItem("userInfo");

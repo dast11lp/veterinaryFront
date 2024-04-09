@@ -13,7 +13,6 @@ import { ListAppointmentsByPet } from "../components/private/ListAppointmentsByP
 export const Routing = () => {
     return (
         <HashRouter>
-
             <div className="layout">
                 <Header />
                 <div className="layout__pages">
