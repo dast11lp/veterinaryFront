@@ -15,10 +15,6 @@ export const ListAppointmentsByPet = () => {
         dispatch(getPetAppointmentsThunk(idPet))
     }, [])
 
-    useEffect(() => {
-        console.log(petAppointments);
-    }, [petAppointments])
-
     return (
         <div>
             <h2>Lista de Citas de {namePet}</h2>

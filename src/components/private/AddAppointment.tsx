@@ -39,7 +39,7 @@ export const AddAppointment = () => {
     const handleDate = (calendarDate: Dayjs) => {
         const myDate: string = calendarDate.toDate().toLocaleDateString();
         setDate(myDate);
-        dispatch(getListHoursThunk(myDate))
+        dispatch(getListHoursThunk({ date: myDate, id: idUser }))
     }
 
     const onSubmit = (data: appointmentTime) => {
@@ -57,7 +57,7 @@ export const AddAppointment = () => {
 
     useEffect(() => {
         if (listAppointments.length === 0)
-            dispatch(getListAppointmentsThunk())
+            dispatch(getListAppointmentsThunk(idUser))
     }, [listAppointments, dispatch])
 
     const dateCalendarStyles = {

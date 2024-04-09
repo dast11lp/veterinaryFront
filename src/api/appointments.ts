@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
+import { toReserve } from "../types/toReserve.type"
 
 const backend = "http://localhost:8080/"
 
 
-const getListAppointmentsFetch = async () => {
-    const id = JSON.parse(localStorage.getItem("userInfo")).id
+const getListAppointmentsFetch = async (id: string | undefined) => {
     if (id) {
         const request = await fetch(`${backend}appointment/dates?idUser=${id}`, {
             method: "GET",
@@ -20,13 +20,14 @@ const getListAppointmentsFetch = async () => {
     }
 }
 
-const getListHoursFetch = async (date: string) => {
-
-    const id = JSON.parse(localStorage.getItem("userInfo")).id
+const getListHoursFetch = async (date: string, id: string | undefined) => {
 
     const [day, month, year] = date.split("/");
 
-    const dateFormated = `${year}-${month <= 9 ? '0' + month : month}-${day <= 9 ? '0' + day : day} `
+    const monthNumber = parseInt(month, 10);
+    const dayNumber = parseInt(day, 10);
+
+    const dateFormated = `${year}-${monthNumber <= 9 ? '0' + month : month}-${dayNumber <= 9 ? '0' + day : day} `
 
     const request = await fetch(`${backend}appointment/hours?idUser=${id}&date=${dateFormated}`, {
         method: "GET",
@@ -41,7 +42,7 @@ const getListHoursFetch = async (date: string) => {
         return await request.json()
 }
 
-const reserveAppointmentFetch = async (data) => {
+const reserveAppointmentFetch = async (data: toReserve) => {
     const request = await fetch(
         `${backend}appointment/request?idUser=${data.idUser}&idPet=${data.idPet}&idAppointment=${data.idAppoint}`,
         {
@@ -57,7 +58,7 @@ const reserveAppointmentFetch = async (data) => {
         return await request.json()
 }
 
-const getPetAppointmentsFetch = async (idPet) => {
+const getPetAppointmentsFetch = async (idPet: string | undefined) => {
     const request = await fetch(`${backend}pet/my-appointments/${idPet}`, {
         method: "GET",
         headers: {
@@ -73,23 +74,23 @@ const getPetAppointmentsFetch = async (idPet) => {
 
 export const getListAppointmentsThunk = createAsyncThunk(
     'appointment/list',
-    async () => {
-        const request = await getListAppointmentsFetch();
+    async (id: string | undefined) => {
+        const request = await getListAppointmentsFetch(id);
         return await request;
     }
 )
 
 export const getListHoursThunk = createAsyncThunk(
     '/appointment/hours',
-    async (date: string) => {
-        const response = await getListHoursFetch(date);
+    async ({ date, id }: { date: string, id: string | undefined }) => {
+        const response = await getListHoursFetch(date, id);
         return await response;
     }
 )
 
 export const reserveAppointmentThunk = createAsyncThunk(
     'appointment/request',
-    async (data: any) => {
+    async (data: toReserve) => {
         const request = await reserveAppointmentFetch(data)
         return await request
     }
@@ -97,7 +98,7 @@ export const reserveAppointmentThunk = createAsyncThunk(
 
 export const getPetAppointmentsThunk = createAsyncThunk(
     '/pet/my-appointments/',
-    async (idPet: any) => {
+    async (idPet: string | undefined) => {
         const request = await getPetAppointmentsFetch(idPet)
         return await request
     }
