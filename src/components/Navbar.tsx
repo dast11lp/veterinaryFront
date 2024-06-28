@@ -48,7 +48,7 @@ export const Navbar = () => {
                         <NavLink className="navbar__nav__links__item__link text-dec-none" to="/servicios" >Servicios</NavLink>
                     </li>
                     <li className="navbar__nav__links__item">
-                        <NavLink className="navbar__nav__links__item__link text-dec-none" to="/contacto" >Contato</NavLink>
+                        <NavLink className="navbar__nav__links__item__link text-dec-none" to="/contacto" >Contacto</NavLink>
                     </li>
                     {!idUser ?
                         <>

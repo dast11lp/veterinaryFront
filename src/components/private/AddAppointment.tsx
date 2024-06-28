@@ -9,7 +9,7 @@ import { getListAppointmentsThunk, getListHoursThunk, reserveAppointmentThunk } 
 import { useSelector } from 'react-redux';
 import { resetAppointmentSlice } from '../../features/appointment/getAppointmentSlice';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 
 // id de la fecha seleccioanda en el select
@@ -22,6 +22,7 @@ export const AddAppointment = () => {
     const { idPet } = useParams()
     const { handleSubmit, control } = useForm<appointmentTime>();
 
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const listAppointments = useSelector((state: RootState) => state.getAppointmentsReducer.listAppointments)
     const listHours = useSelector((state: RootState) => state.getAppointmentsReducer.listHours)
@@ -49,6 +50,7 @@ export const AddAppointment = () => {
             idPet
         }
         dispatch(reserveAppointmentThunk(appointData))
+        navigate('/mascotas', {replace: true})
     }
 
     useEffect(() => {
