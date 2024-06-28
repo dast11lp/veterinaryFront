@@ -1,19 +1,36 @@
 // import { useSelector } from 'react-redux'
 import { registerUserThunk } from '../api/auth';
 import { Input } from './Input';
-import { useAppDispatch } from '../app/store';
+import { RootState, useAppDispatch } from '../app/store';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { registerFormRules } from '../helpers';
 import { UserData } from '../types/User.type';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { setSuccess } from '../features/auth/authSlice';
 
 export const UserRegister = () => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<UserData>({ mode: 'all' });
+
+    const navigate = useNavigate();
+
     const dispatch = useAppDispatch();
+
+    const authSucces: boolean = useSelector((state: RootState) => state.authReducer.success);
 
     const onSubmit: SubmitHandler<UserData> = (data) => {
         dispatch(registerUserThunk(data))
     };
+
+
+    useEffect(()=> {
+        if (authSucces === true) {
+            setSuccess(false);
+            navigate('/login', {replace: true})
+        }
+    },[authSucces])
 
     return (
         <div className='register'>

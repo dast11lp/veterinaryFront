@@ -25,7 +25,7 @@ export const Navbar = () => {
     }
 
     const styleOpen = {
-        display: `${openedMenu ? '' : 'flex'}`
+        display: `${!openedMenu ? '' : 'flex'}`
     }
 
     return (

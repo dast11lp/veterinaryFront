@@ -17,7 +17,7 @@ export const Login = () => {
 
   const { handleSubmit, register, watch, formState: { errors } } = useForm<InputsLogin>({ mode: 'all' })
 
-  const success: boolean = useSelector((state: RootState) => state.authReducer.success)
+  const userToken: string | null = useSelector((state: RootState) => state.authReducer.userToken)
   
 
   const dispatch = useAppDispatch();
@@ -27,13 +27,14 @@ export const Login = () => {
     dispatch(loginThunk(data));
 
   }
+  console.log("???"+userToken);
+  
 
   useEffect(() => {
-    if (success === true) {
+    if (userToken !== null) {
       navigate('/', { replace: true })
-      dispatch(setSuccess(false))
     }
-  }, [success])
+  }, [userToken])
 
   return (
     <div className="login" onSubmit={handleSubmit(onSubmit)}>

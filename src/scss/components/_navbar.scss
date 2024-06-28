@@ -14,6 +14,7 @@
             font-size: 2.5rem;
         }
         &__links {
+            display: flex;
             flex: 1 1;
             justify-content: center;
             list-style: none;

@@ -62,14 +62,16 @@ export const authSlice = createSlice({
       state.error = null
       state.success = false
     })
-    builder.addCase(registerUserThunk.fulfilled, (state, action: PayloadAction<Authorization>) => {
-      state.userToken = action.payload.Authorization
+    builder.addCase(registerUserThunk.fulfilled, (state, /*action: PayloadAction<Authorization>*/) => {
+      // state.userToken = action.payload.Authorization
       state.loading = false;
       state.error = true;
+      state.success = true;
     })
     builder.addCase(registerUserThunk.rejected, (state) => {
       state.loading = false;
       state.error = true;
+      state.success = false;
     })
 
     // Login Handlers 
