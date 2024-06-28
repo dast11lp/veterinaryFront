@@ -1,9 +1,12 @@
 import { SubmitHandler, useForm } from "react-hook-form"
 import { Input } from "./Input"
 import { registerFormRules } from "../helpers"
-import { useAppDispatch } from "../app/store"
+import { RootState, useAppDispatch } from "../app/store"
 import { loginThunk } from "../api/auth"
 import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import { setSuccess } from "../features/auth/authSlice"
 
 export interface InputsLogin {
   email: string,
@@ -13,13 +16,24 @@ export interface InputsLogin {
 export const Login = () => {
 
   const { handleSubmit, register, watch, formState: { errors } } = useForm<InputsLogin>({ mode: 'all' })
+
+  const success: boolean = useSelector((state: RootState) => state.authReducer.success)
+  
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
 
   const onSubmit: SubmitHandler<InputsLogin> = (data) => {
     dispatch(loginThunk(data));
-    navigate('/', {replace: true})
+
   }
+
+  useEffect(() => {
+    if (success === true) {
+      navigate('/', { replace: true })
+      dispatch(setSuccess(false))
+    }
+  }, [success])
 
   return (
     <div className="login" onSubmit={handleSubmit(onSubmit)}>

@@ -1,12 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { toReserve } from "../types/toReserve.type"
+import { Config } from "./config.ts"
 
-const backend = "http://localhost:8080/"
 
 
 const getListAppointmentsFetch = async (id: string | undefined) => {
     if (id) {
-        const request = await fetch(`${backend}appointment/dates?idUser=${id}`, {
+        const request = await fetch(`${Config.hostname}appointment/dates?idUser=${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -29,7 +29,7 @@ const getListHoursFetch = async (date: string, id: string | undefined) => {
 
     const dateFormated = `${year}-${monthNumber <= 9 ? '0' + month : month}-${dayNumber <= 9 ? '0' + day : day} `
 
-    const request = await fetch(`${backend}appointment/hours?idUser=${id}&date=${dateFormated}`, {
+    const request = await fetch(`${Config.hostname}appointment/hours?idUser=${id}&date=${dateFormated}`, {
         method: "GET",
         headers: {
             "Content-type": "application/json",
@@ -44,7 +44,7 @@ const getListHoursFetch = async (date: string, id: string | undefined) => {
 
 const reserveAppointmentFetch = async (data: toReserve) => {
     const request = await fetch(
-        `${backend}appointment/request?idUser=${data.idUser}&idPet=${data.idPet}&idAppointment=${data.idAppoint}`,
+        `${Config.hostname}appointment/request?idUser=${data.idUser}&idPet=${data.idPet}&idAppointment=${data.idAppoint}`,
         {
             method: "PUT",
             headers: {
@@ -59,7 +59,7 @@ const reserveAppointmentFetch = async (data: toReserve) => {
 }
 
 const getPetAppointmentsFetch = async (idPet: string | undefined) => {
-    const request = await fetch(`${backend}pet/my-appointments/${idPet}`, {
+    const request = await fetch(`${Config.hostname}pet/my-appointments/${idPet}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

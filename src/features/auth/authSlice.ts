@@ -47,7 +47,12 @@ export const authSlice = createSlice({
 
       state.userInfo = null;
       state.userToken = null;
-    }
+      state.success = false;
+    },
+
+    setSuccess: ((state, action: PayloadAction<boolean>)=> {
+      state.success = action.payload;
+    })
 
   },
   extraReducers: (builder) => {
@@ -55,6 +60,7 @@ export const authSlice = createSlice({
     builder.addCase(registerUserThunk.pending, (state) => {
       state.loading = true
       state.error = null
+      state.success = false
     })
     builder.addCase(registerUserThunk.fulfilled, (state, action: PayloadAction<Authorization>) => {
       state.userToken = action.payload.Authorization
@@ -70,6 +76,7 @@ export const authSlice = createSlice({
     builder.addCase(loginThunk.pending, (state) => {
       state.loading = true;
       state.error = null;
+      state.success = false
     })
     builder.addCase(loginThunk.fulfilled, (state, action: PayloadAction<Authorization>) => {
       state.userToken = action.payload.Authorization
@@ -83,6 +90,7 @@ export const authSlice = createSlice({
       localStorage.setItem("token", action.payload.Authorization)
       state.error = false;
       state.loading = false;
+      state.success = true;
     })
     builder.addCase(loginThunk.rejected, (state) => {
       state.loading = false;
@@ -92,5 +100,5 @@ export const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { verifyAuth, setLogOut } = authSlice.actions;
+export const { verifyAuth, setLogOut, setSuccess } = authSlice.actions;
 

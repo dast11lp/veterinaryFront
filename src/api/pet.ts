@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { PetData } from "../types/Pet.types";
+import { Config } from "./config.ts";
 
-// const back: string = 'http://localhost:8080/'
-const back: string = 'https://veterinary-back-final.onrender.com/'
+const back: string = Config.hostname
 
 const backend: string = back +"owner/";
 const backend2: string = back;

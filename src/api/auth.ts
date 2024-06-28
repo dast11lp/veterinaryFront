@@ -1,12 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { UserData, UserLogin } from "../types/User.type";
+import { Config } from "./config.ts";
 
-// const backend: string = "http://localhost:8080/";
-const backend: string = "https://veterinary-back-final.onrender.com/";
+
 
 const registerUserFetch = async (body: UserData) => {
 
-    const request = await fetch(`${backend}owner/register`, {
+    const request = await fetch(`${Config.hostname}owner/register`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -20,7 +20,7 @@ const registerUserFetch = async (body: UserData) => {
 }
 
 const loginFetch = async (data: UserLogin) => {
-    const request = await fetch(`${backend}auth/login?email=${data.email}&password=${data.password}`, {
+    const request = await fetch(`${Config.hostname}auth/login?email=${data.email}&password=${data.password}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
