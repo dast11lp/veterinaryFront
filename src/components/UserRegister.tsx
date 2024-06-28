@@ -20,12 +20,12 @@ export const UserRegister = () => {
             {/* <div>{userInfo}</div> */}
             <form className='form' onSubmit={handleSubmit(onSubmit)}>
                 <h2 className='form__title'>Registrarse</h2>
-                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.firstname} name={"firstname"} label={"Nombre"} />
-                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.surname} name={"surname"} label={"Apellido"} />
-                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.email} name={"email"} label={"Correo Electrónico"} />
-                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.password} name={"password"} label={"Contraseña"} />
-                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.address} name={"address"} label={"Dirección"} />
-                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.phoneNumber} name={"phoneNumber"} label={"Teléfono"} />
+                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.firstname} name={"firstname"} label={"Nombre"} type='text' />
+                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.surname} name={"surname"} label={"Apellido"} type='text' />
+                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.email} name={"email"} label={"Correo Electrónico"} type='text' />
+                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.password} name={"password"} label={"Contraseña"} type='text' />
+                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.address} name={"address"} label={"Dirección"} type='text' />
+                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.phoneNumber} name={"phoneNumber"} label={"Teléfono"} type='text' />
                 <input type='submit' className='btn btn--form' value="Registrarse" />
             </form>
         </div>

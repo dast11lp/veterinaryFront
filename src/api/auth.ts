@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { UserData, UserLogin } from "../types/User.type";
 
-const backend: string = "http://localhost:8080/";
+// const backend: string = "http://localhost:8080/";
+const backend: string = "https://veterinary-back-final.onrender.com/";
 
 const registerUserFetch = async (body: UserData) => {
 

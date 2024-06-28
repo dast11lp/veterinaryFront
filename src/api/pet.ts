@@ -1,8 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { PetData } from "../types/Pet.types";
 
-const backend: string = "http://localhost:8080/owner/";
-const backend2: string = "http://localhost:8080/";
+// const back: string = 'http://localhost:8080/'
+const back: string = 'https://veterinary-back-final.onrender.com/'
+
+const backend: string = back +"owner/";
+const backend2: string = back;
 
 const registerPetFetch = async (body: PetData) => {
 
