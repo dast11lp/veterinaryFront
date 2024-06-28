@@ -1,4 +1,4 @@
-import { faBars } from "@fortawesome/free-solid-svg-icons"
+import { faBars, faGear } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
@@ -68,7 +68,7 @@ export const Navbar = () => {
                 {idUser ? <div className="navbar__nav__user-settings"
                     style={styleOpen}
                 >
-                    settings
+                    <FontAwesomeIcon icon={faGear} />
                 </div> : ''}
                 <div className="navbar__nav__menu" onClick={openMenu}>
                     <FontAwesomeIcon className="navbar__nav__menu__icon" icon={faBars} />
