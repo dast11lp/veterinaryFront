@@ -3,6 +3,7 @@ import { Input } from "./Input"
 import { registerFormRules } from "../helpers"
 import { useAppDispatch } from "../app/store"
 import { loginThunk } from "../api/auth"
+import { useNavigate } from "react-router-dom"
 
 export interface InputsLogin {
   email: string,
@@ -13,9 +14,11 @@ export const Login = () => {
 
   const { handleSubmit, register, watch, formState: { errors } } = useForm<InputsLogin>({ mode: 'all' })
   const dispatch = useAppDispatch();
+  const navigate = useNavigate()
 
   const onSubmit: SubmitHandler<InputsLogin> = (data) => {
     dispatch(loginThunk(data));
+    navigate('/', {replace: true})
   }
 
   return (
