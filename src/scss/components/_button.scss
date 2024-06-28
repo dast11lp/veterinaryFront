@@ -8,6 +8,8 @@
     transition: transform .2s ease;
 
     &--flex {
+        display: flex;
+        justify-content: center;
         max-width: 14rem ;
     }
 

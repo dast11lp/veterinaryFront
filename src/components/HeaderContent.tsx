@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import dogBackground from "../assets/img/dog-header.png";
 export const HeaderContent = () => {
     return (
@@ -7,7 +8,7 @@ export const HeaderContent = () => {
                 <p className="header__content__left__pg">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus temporibus, nisi autem provident repellendus accusamus et animi voluptatem.
                 </p>
-                <button className="btn btn--flex">More info</button>
+                <Link className="btn btn--flex text-dec-none" to="/contacto">More info</Link>
             </div>
             <div className="header__content__right"></div>
             <div className="header__content__bottom">

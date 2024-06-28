@@ -1,3 +1,5 @@
+@use '../abstracts/variables' as v;
+
 .navbar {
     z-index: 100;
     grid-area: navbar;
@@ -19,7 +21,14 @@
             &__item {
                 margin: 0 5px;
                 &__link {
-                    text-decoration: none;
+                    padding: 1rem;
+                    background: v.$color--quintenary--dark;
+                    border-radius: 50px;
+                    color: v.$color--secundary;
+
+                    &:hover {
+                        transform: scale(1.1);
+                    }
                 }
             }
         }
@@ -52,7 +61,8 @@
                 display: none;
                 flex-direction: column;
                 &__item {
-                    margin: 5px 0;
+                    margin: 12px 0;
+                    
                 }
             }
             &__user-settings {

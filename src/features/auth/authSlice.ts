@@ -39,7 +39,16 @@ export const authSlice = createSlice({
       if (token !== null) {
         state.userToken = token;
       }
+    },
+
+    setLogOut: (state) => {
+      localStorage.removeItem("token")
+      localStorage.removeItem("userInfo")
+
+      state.userInfo = null;
+      state.userToken = null;
     }
+
   },
   extraReducers: (builder) => {
     //Register Handlers 
@@ -83,5 +92,5 @@ export const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { verifyAuth } = authSlice.actions;
+export const { verifyAuth, setLogOut } = authSlice.actions;
 
