@@ -32,11 +32,11 @@ export const PetRegister = () => {
             {/* <div>{userInfo}</div> */}
             <form className='form' onSubmit={handleSubmit(onSubmit)}>
                 <h2 className='form__title'>Registra tu Mascota</h2>
-                <Input register={register} watch={watch} errors={errors} rules={registerPetFormRules.name} name={"name"} label={"Nombre"} type='text' />
-                <Input register={register} watch={watch} errors={errors} rules={registerPetFormRules.high} name={"high"} label={"Altura"} type='text' />
-                <Input register={register} watch={watch} errors={errors} rules={registerPetFormRules.weight} name={"weight"} label={"Peso"} type='text' />
-                <Input register={register} watch={watch} errors={errors} rules={registerPetFormRules.species} name={"species"} label={"Especie"} type='text' />
-                <Input register={register} watch={watch} errors={errors} rules={registerPetFormRules.breed} name={"breed"} label={"Raza"} type='text' />
+                <Input register={register} watch={watch} errors={errors} rules={registerPetFormRules.name} name={"name"} label={"Nombre"} type='text' icon={null}/>
+                <Input register={register} watch={watch} errors={errors} rules={registerPetFormRules.high} name={"high"} label={"Altura"} type='text' icon={null}/>
+                <Input register={register} watch={watch} errors={errors} rules={registerPetFormRules.weight} name={"weight"} label={"Peso"} type='text' icon={null}/>
+                <Input register={register} watch={watch} errors={errors} rules={registerPetFormRules.species} name={"species"} label={"Especie"} type='text' icon={null}/>
+                <Input register={register} watch={watch} errors={errors} rules={registerPetFormRules.breed} name={"breed"} label={"Raza"} type='text' icon={null}/>
                 <input type='submit' className='btn btn--form' value="Registrarse" />
             </form>
         </div>
