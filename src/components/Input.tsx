@@ -7,9 +7,10 @@ interface Props<T extends FieldValues> {
   rules: object;
   name: string;
   label: string;
+  type: string;
 }
 
-export const Input = <T extends FieldValues>({ register, watch, rules, errors, name, label }: Props<T>) => {
+export const Input = <T extends FieldValues>({ register, watch, rules, errors, name, label, type}: Props<T>) => {
   const labelOff = {
     top: "0",
     left: "0",
@@ -17,7 +18,7 @@ export const Input = <T extends FieldValues>({ register, watch, rules, errors, n
 
   return (
     <div className="input">
-      <input {...register(name as Path<T>, rules)} className="input__input-box" type="text" />
+      <input {...register(name as Path<T>, rules)} className="input__input-box" type={type} />
       <label className="input__label" style={watch(name as Path<T>) ? labelOff : {}}>{label}</label>
       {errors[name as Path<T>] && <span className="input__msg input__msg--error">{errors?.[name]?.message?.toString()}</span>}
     </div>

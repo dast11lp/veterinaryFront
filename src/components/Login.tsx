@@ -23,8 +23,8 @@ export const Login = () => {
       <form className="login__form">
         <h1>Logo</h1>
         <p>Accede fácilmente para mimar a tu mascota</p>
-        <Input register={register} watch={watch} rules={registerFormRules.email} errors={errors} name={"email"} label={"Correo Electrónico"}></Input>
-        <Input register={register} watch={watch} rules={registerFormRules.password} errors={errors} name={"password"} label={"Contraseña"}></Input>
+        <Input register={register} watch={watch} rules={registerFormRules.email} errors={errors} name={"email"} label={"Correo Electrónico"} type="text"></Input>
+        <Input register={register} watch={watch} rules={registerFormRules.password} errors={errors} name={"password"} label={"Contraseña"} type="password"></Input>
         <input type='submit' className='btn btn--form' value="Iniciar Sesión" />
       </form>
     </div>
