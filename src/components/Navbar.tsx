@@ -20,7 +20,7 @@ export const Navbar = () => {
         <nav className="navbar">
             <div className="navbar__nav">
                 <div className="navbar__nav__logo">
-                    <span>Logo</span>
+                    <span>VetCare</span>
                 </div>
 
                 <ul className="navbar__nav__links" style={styleOpen}>

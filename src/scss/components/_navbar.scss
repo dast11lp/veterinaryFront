@@ -6,11 +6,16 @@
         padding: 5rem 0;
         max-width: 120rem;
         margin: auto;
+        &__logo {
+            font-family: "Playwrite AU SA", cursive;
+            font-weight: 400;
+            font-size: 2.5rem;
+        }
         &__links {
             flex: 1 1;
-            display: flex;
             justify-content: center;
             list-style: none;
+            align-items: center;
             &__item {
                 margin: 0 5px;
                 &__link {
@@ -19,8 +24,9 @@
             }
         }
 
-        // &__user-settings {
-        // }
+        &__user-settings {
+            align-items: center;
+        }
         &__menu {
             display: none;
             height: 35px;

@@ -29,6 +29,16 @@
             top: 0;
             left: 0;
         }
+
+        &--medium {
+            height: 5rem;
+            width: 35rem;
+        }
+
+        &--large {
+            height: 7.5rem;
+            width: 35rem;
+        }
     }
     &__msg {
         position: absolute;

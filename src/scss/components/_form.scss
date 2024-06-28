@@ -13,8 +13,18 @@
     grid-auto-rows: minmax(100px, auto);
     justify-items: center;
     align-items: center ;
+    margin: auto;
     &__title {
         grid-column: 1 / -1;
+    }
+
+    &--1-column {
+        grid-template-rows: repeat(5,1fr);
+        grid-template-columns: 1fr
+    }
+
+    &--mini {
+        max-width: 35rem;
     }
     
 }

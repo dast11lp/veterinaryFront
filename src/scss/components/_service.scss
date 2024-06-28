@@ -1,0 +1,39 @@
+@use '../abstracts/variables' as v;
+
+.service {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+
+    &__img {
+        width: 20rem;
+        max-height: 20rem;
+
+        background-color: v.$color--primary--light;
+        
+        mask-image: linear-gradient(
+            black 85%,
+            transparent 
+        );
+        // mask-image: linear-gradient(
+        //     transparent,
+        //     black 80%
+        // );
+        border-radius: 5px;
+    }
+
+    &__name {
+        position: relative;
+        font-size: 25px;
+        background-color: v.$color--primary;
+        border-radius: 50px;
+        padding: 10px 20px;
+        // top: -10px;
+        box-shadow: v.$border--shadow--secundary;
+    }
+
+    &:hover {
+        transform: scale(1.13);
+
+    }
+}
