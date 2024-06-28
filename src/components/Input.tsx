@@ -1,6 +1,6 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import { FieldErrors, FieldValues, Path, UseFormRegister, UseFormWatch } from "react-hook-form";
 
 interface Props<T extends FieldValues> {

@@ -6,7 +6,6 @@ import { loginThunk } from "../api/auth"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useEffect } from "react"
-import { setSuccess } from "../features/auth/authSlice"
 import { faEye } from "@fortawesome/free-solid-svg-icons"
 
 export interface InputsLogin {
