@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { setSuccess } from '../features/auth/authSlice';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 export const UserRegister = () => {
 
@@ -37,12 +38,12 @@ export const UserRegister = () => {
             {/* <div>{userInfo}</div> */}
             <form className='form' onSubmit={handleSubmit(onSubmit)}>
                 <h2 className='form__title'>Registrarse</h2>
-                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.firstname} name={"firstname"} label={"Nombre"} type='text' />
-                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.surname} name={"surname"} label={"Apellido"} type='text' />
-                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.email} name={"email"} label={"Correo Electrónico"} type='text' />
-                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.password} name={"password"} label={"Contraseña"} type='text' />
-                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.address} name={"address"} label={"Dirección"} type='text' />
-                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.phoneNumber} name={"phoneNumber"} label={"Teléfono"} type='text' />
+                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.firstname} name={"firstname"} label={"Nombre"} type='text' icon={null}/>
+                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.surname} name={"surname"} label={"Apellido"} type='text' icon={null}/>
+                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.email} name={"email"} label={"Correo Electrónico"} type='text' icon={null}/>
+                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.password} name={"password"} label={"Contraseña"} type='password' icon={faEye}/>
+                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.address} name={"address"} label={"Dirección"} type='text' icon={null}/>
+                <Input register={register} watch={watch} errors={errors} rules={registerFormRules.phoneNumber} name={"phoneNumber"} label={"Teléfono"} type='text' icon={null}/>
                 <input type='submit' className='btn btn--form' value="Registrarse" />
             </form>
         </div>
