@@ -2,7 +2,7 @@ import { faBars, faGear } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { RootState } from "../app/store";
 import { setLogOut } from "../features/auth/authSlice";
 
@@ -32,7 +32,7 @@ export const Navbar = () => {
         <nav className="navbar">
             <div className="navbar__nav">
                 <div className="navbar__nav__logo">
-                    <span>VetCare</span>
+                    <span><Link to={'/'}>VetCare</Link></span>
                 </div>
 
                 <ul className="navbar__nav__links" style={styleOpen}>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import dogBackground from "../assets/img/dog-header.png";
+
 export const HeaderContent = () => {
     return (
         <div className="header__content">
@@ -28,17 +28,7 @@ export const HeaderContent = () => {
                     <b>Any info</b>
                 </div>
             </div>
-            <div className="header__backgroud" style={{
-                position: "absolute",
-                zIndex: "-1",
-                top: 0,
-                background: `url(${dogBackground})`,
-                backgroundSize: "cover",
-                height: "100%",
-                width: "100%",
-                // clipPath: "ellipse(31% 52% at 61% 52%)"
-                clipPath: "ellipse(30% 70% at 70% 40%)",
-            }} />
+           
         </div>
     )
 }

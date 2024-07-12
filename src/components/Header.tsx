@@ -7,9 +7,9 @@ import { useEffect, useState } from "react"
 export const Header: React.FC = () => {
 
   const location = useLocation()
-  const [homePlaced, setHomePlaced]= useState(false);
-  useEffect(()=> {
-    if(location.pathname === '/')
+  const [homePlaced, setHomePlaced] = useState(false);
+  useEffect(() => {
+    if (location.pathname === '/')
       setHomePlaced(true)
     else
       setHomePlaced(false)
@@ -17,10 +17,14 @@ export const Header: React.FC = () => {
 
   return (
     <header className="header" style={{
-      minHeight: `${homePlaced === true ? '100vh': ''}`
+      minHeight: `${homePlaced === true ? '100vh' : ''}`
     }}>
+      {
+        homePlaced && <div className="header__background" /> }
+
+
       <Navbar />
-      { homePlaced === true ? <HeaderContent /> : null}
+      {homePlaced === true ? <HeaderContent /> : null}
     </header>
   )
 }
