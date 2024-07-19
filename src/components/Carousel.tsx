@@ -17,7 +17,7 @@ export const Carousel = () => {
       setSlides(Array.from(slidesNode));
     }
   }, []);
-  
+
 
   useEffect(() => {
     goToSlice(currSlide);
@@ -59,26 +59,29 @@ export const Carousel = () => {
         <CarouselSlide />
         <CarouselSlide />
         <CarouselSlide />
-        <div className="slider__dots" ref={dotContainerRef}>
-          {slides.map((_, i) => (
-            <button
-              className="slider__dots__dot"
-              style={{
-                background: i === currSlide ? '#47464659' : ''
-              }}
-              key={i}
-              onClick={() => moveWithBtn(i)}
-            ></button>
-          ))}
+        <div className="slider__navigate">
+
+          <button className="slider__btn slider__btn--left" onClick={prevSlide}>
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </button>
+
+          <div className="slider__dots" ref={dotContainerRef}>
+            {slides.map((_, i) => (
+              <button
+                className="slider__dots__dot"
+                style={{
+                  background: i === currSlide ? '#47464659' : ''
+                }}
+                key={i}
+                onClick={() => moveWithBtn(i)}
+              ></button>
+            ))}
+          </div>
+
+          <button className="slider__btn slider__btn--right" onClick={nextSlide}>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </button>
         </div>
-
-        <button className="slider__btn slider__btn--left" onClick={prevSlide}>
-          <FontAwesomeIcon icon={faChevronLeft} />
-        </button>
-
-        <button className="slider__btn slider__btn--right" onClick={nextSlide}>
-          <FontAwesomeIcon icon={faChevronRight} />
-        </button>
       </div>
     </div>
   );

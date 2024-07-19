@@ -1,23 +1,59 @@
+@use './variables' as v;
+
 @mixin body-font($breakpoint) {
-    @if ($breakpoint <= 980px) {
+    @if ($breakpoint <=980px) {
         @media screen and (max-width: 980px) {
-            font-size: clamp(1.2rem, 1vw, 1.4rem); 
+            font-size: clamp(1.2rem, 1vw, 1.4rem);
         }
-     }
+    }
 }
 
 @mixin header-background ($breakpoint) {
     @media screen and (max-width: 875px) {
-        background-position-x: 500px ;
+        background-position-x: 500px;
     }
 }
 
 
 @mixin card($breakpoint) {
-    @if ($breakpoint <= 980px) {
+    @if ($breakpoint <= 980px and $breakpoint > 570px) {
         @media screen and (max-width: 980px) {
-            // font-size: 1.3rem;
+            &__image {
+                position: relative;
+                clip-path: circle(60% at 75% 50%);
+            }
+
         }
-     }
+    }
+
+    @if ($breakpoint <=570px) {
+        @media screen and (max-width: 570px) {
+            &__image {
+                &__img {
+                    top: 0px;
+                    right: 0px;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+    
+
+    @if ($breakpoint <= 305px) {
+        @media screen and (max-width: 305px) {
+            padding: 2rem;
+        }
+    }
 }
 
+@mixin slide($breakpoint) {
+    @media screen and (max-width: 834px) {
+        flex-direction: column;
+    }
+}
+@mixin slider($breakpoint) {
+    @media screen and (max-width: 834px) {
+        height: 55rem;
+    }
+}

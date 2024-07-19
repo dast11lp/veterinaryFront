@@ -3,7 +3,7 @@
 
 .card-carousel {
     height: 200px;
-    width: 550px;
+    max-width: 550px;
     background: v.$color--secundary;
     box-shadow: v.$border--shadow--primary;
     border-radius: v.$border-radius--primary;
@@ -20,6 +20,7 @@
         flex-direction: column;
         justify-content: space-around;
         padding: 3rem;
+        @include m.card(305px);
     }
 
     &__image{
@@ -27,6 +28,7 @@
         background: v.$color--tertiary;
         border-radius: v.$border-radius--primary;
         clip-path: circle(50% at 75% 50%);
+        height: inherit;
         &__img{
             position: absolute;
             top: -13px;
@@ -36,5 +38,6 @@
             object-fit: cover;
         }
     }
-    @include m.card(980px)
+    @include m.card(970px);
+    @include m.card(570px);
 }
