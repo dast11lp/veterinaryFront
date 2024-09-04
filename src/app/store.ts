@@ -4,6 +4,7 @@ import petReducer from "../features/pet/petSlice";
 import getAppointmentsReducer from "../features/appointment/getAppointmentSlice";
 import reserveAppointmentReducer from "../features/appointment/reserveAppointmentSlice";
 import getPetAppointmentsReducer from "../features/appointment/getPetAppointmentsSlice";
+import getServicesSlice from "../features/services/getServicesSlice";
 import { useDispatch } from "react-redux";
 
 export const useAppDispatch = () => useDispatch<typeof store.dispatch>()
@@ -15,6 +16,7 @@ export const store = configureStore({
     getAppointmentsReducer,
     reserveAppointmentReducer,
     getPetAppointmentsReducer,
+    getServicesSlice,
   },
 });
 

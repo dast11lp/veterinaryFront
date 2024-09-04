@@ -1,12 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { UserData, UserLogin } from "../types/User.type";
-import { Config } from "./config.ts";
+const API_URL = import.meta.env.VITE_API_URL
 
 
 
 const registerUserFetch = async (body: UserData) => {
 
-    const request = await fetch(`${Config.hostname}owner/register`, {
+    const request = await fetch(`${API_URL}owner/register`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -20,7 +20,7 @@ const registerUserFetch = async (body: UserData) => {
 }
 
 const loginFetch = async (data: UserLogin) => {
-    const request = await fetch(`${Config.hostname}auth/login?email=${data.email}&password=${data.password}`, {
+    const request = await fetch(`${API_URL}auth/login?email=${data.email}&password=${data.password}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

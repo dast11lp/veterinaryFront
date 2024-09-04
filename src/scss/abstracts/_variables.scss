@@ -2,8 +2,10 @@ $color--primary: #e9ecf7;
 $color--primary--light:#f1f3fa;
 $color--secundary: #fff;
 $color--tertiary: #f8de8a;
-$color--quintenary: #86f3e1;
-$color--quintenary--dark: #7fccd1;
+$color--tertiary--dark: #cfb832;
+$color--quintenary: #71cbce;
+$color--quintenary--dark: #50bac2;
+$color--senary: #1f1c1c;
 
 $color-error: #c92e1a;
 
@@ -12,3 +14,6 @@ $border-radius--right: 0 2rem 2rem 0;
 
 $border--shadow--primary: 0 -1px 10px  rgba(#000, .8);
 $border--shadow--secundary: 0 -1px 10px  rgba(#000, .2);
+$border--shadow--tertiary: 0 -1px 10px  rgba(#dae66f, .5);
+
+$border--primary: 1px solid $color--tertiary;

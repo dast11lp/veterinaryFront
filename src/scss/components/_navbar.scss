@@ -3,24 +3,29 @@
 .navbar {
     z-index: 100;
     grid-area: navbar;
+
     &__nav {
         display: flex;
         padding: 5rem 0;
         max-width: 120rem;
         margin: auto;
+
         &__logo {
             font-family: "Playwrite AU SA", cursive;
             font-weight: 400;
             font-size: 2.5rem;
         }
+
         &__links {
             display: flex;
             flex: 1 1;
             justify-content: center;
             list-style: none;
             align-items: center;
+
             &__item {
                 margin: 0 5px;
+
                 &__link {
                     padding: 1rem;
                     background: v.$color--quintenary--dark;
@@ -45,6 +50,7 @@
             height: 4rem;
             border-radius: 100%;
         }
+
         &__menu {
             display: none;
             height: 35px;
@@ -53,6 +59,7 @@
             &__icon {
                 font-size: 35px;
             }
+
             &:hover {
                 cursor: pointer;
             }
@@ -66,17 +73,31 @@
             flex-direction: column;
             position: relative;
             padding: 0.5rem;
+
             &__links {
                 display: none;
                 flex-direction: column;
+
                 &__item {
-                    margin: 12px 0;
-                    
+                    margin: 0.5rem 0;
+                    width: 100%;
+
+                    &__link {
+                        display: block;
+                        text-align: center;
+                        border: v.$border--primary;
+
+                        &:hover {
+                            background-color: v.$color--quintenary;
+                        }
+                    }
                 }
             }
+
             &__user-settings {
                 display: none;
             }
+
             &__menu {
                 display: block;
                 position: absolute;
@@ -84,5 +105,11 @@
                 right: 1rem;
             }
         }
+    }
+
+    .btn {
+        width: 100%;
+        display: block;
+        text-align: center;
     }
 }

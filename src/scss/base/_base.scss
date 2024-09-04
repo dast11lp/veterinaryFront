@@ -9,6 +9,12 @@
     box-sizing: inherit;
 }
 
+a,
+a:active
+a:visited {
+    text-decoration: none;
+}
+
 html {
     font-size: f.font-base(10);
     box-sizing: border-box;

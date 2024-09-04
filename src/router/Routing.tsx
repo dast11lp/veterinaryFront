@@ -9,6 +9,7 @@ import { Login } from "../components/Login"
 import { PetRegister } from "../components/private/PetRegister"
 import { AddAppointment } from "../components/private/AddAppointment"
 import { ListAppointmentsByPet } from "../components/private/ListAppointmentsByPet"
+import ServiceInfo from "../components/ServiceInfo"
 
 export const Routing = () => {
     return (
@@ -22,6 +23,7 @@ export const Routing = () => {
                                 <Route index element={<Home />} />
                                 <Route path="/contacto" element={<Contact />} />
                                 <Route path="/servicios" element={<Services />} />
+                                <Route path="/servicios/:idService" element={<ServiceInfo />} />
                                 <Route path="/mascotas" element={<MyPets />} />
                                 <Route path="/registro" element={<UserRegister />} />
                                 <Route path="/login" element={<Login />} />

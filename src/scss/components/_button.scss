@@ -6,22 +6,24 @@
     border: none;
     border-radius: v.$border-radius--primary;
     transition: transform .2s ease;
+    text-decoration: none;
+    color: v.$color--senary;
 
     &--flex {
         display: flex;
         justify-content: center;
-        max-width: 14rem ;
+        max-width: 14rem;
     }
 
     &--form {
         grid-column: 1 / -1;
     }
-    
+
     &:hover {
         cursor: pointer;
         transform: scale(1.1);
     }
-    
+
     &:active {
         transform: translateY(5px);
     }
@@ -30,10 +32,16 @@
         transition: none;
         background-color: #cccccc7e;
         color: #272727a8;
-        
+
         &:hover,
         &:active {
             transform: none;
         }
+    }
+
+    &--large {
+        width: 100%;
+        display: block;
+        text-align: center;
     }
 }

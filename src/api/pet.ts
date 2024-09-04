@@ -1,11 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { PetData } from "../types/Pet.types";
-import { Config } from "./config.ts";
+const API_URL = import.meta.env.VITE_API_URL
 
-const back: string = Config.hostname
-
-const backend: string = back +"owner/";
-const backend2: string = back;
+const backend: string = API_URL +"owner/";
+const backend2: string = API_URL;
 
 const registerPetFetch = async (body: PetData) => {
 
